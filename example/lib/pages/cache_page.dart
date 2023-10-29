@@ -20,7 +20,8 @@ class _CachePageState extends State<CachePage> {
     );
     _betterPlayerDataSource = BetterPlayerDataSource(
       BetterPlayerDataSourceType.network,
-      Constants.phantomVideoUrl,
+      "https://hi-erbil.s3.amazonaws.com/2023/October/b8bdcb74-2bee-4050-be2d-dfac650c3090-2",
+      // Constants.phantomVideoUrl,
       cacheConfiguration: BetterPlayerCacheConfiguration(
         useCache: true,
         preCacheSize: 10 * 1024 * 1024,
