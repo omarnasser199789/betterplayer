@@ -20,8 +20,10 @@ class _CachePageState extends State<CachePage> {
     );
     _betterPlayerDataSource = BetterPlayerDataSource(
       BetterPlayerDataSourceType.network,
-      "https://hi-erbil.s3.amazonaws.com/2023/October/b8bdcb74-2bee-4050-be2d-dfac650c3090-2",
+      // "https://hi-erbil.s3.amazonaws.com/2023/October/b8bdcb74-2bee-4050-be2d-dfac650c3090-2",
+      "https://hi-erbil.s3.amazonaws.com/processVideos/2023/November/1698789806355_YOrd8Lw7r2/index.m3u8",
       // Constants.phantomVideoUrl,
+      liveStream: true,
       cacheConfiguration: BetterPlayerCacheConfiguration(
         useCache: true,
         preCacheSize: 10 * 1024 * 1024,

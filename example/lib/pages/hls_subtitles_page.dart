@@ -12,8 +12,15 @@ class _HlsSubtitlesPageState extends State<HlsSubtitlesPage> {
 
   @override
   void initState() {
+
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     BetterPlayerControlsConfiguration controlsConfiguration =
-        BetterPlayerControlsConfiguration(
+    BetterPlayerControlsConfiguration(
       controlBarColor: Colors.black26,
       iconsColor: Colors.white,
       playIcon: Icons.play_arrow_outlined,
@@ -41,43 +48,28 @@ class _HlsSubtitlesPageState extends State<HlsSubtitlesPage> {
     );
 
     BetterPlayerConfiguration betterPlayerConfiguration =
-        BetterPlayerConfiguration(
-            controlsConfiguration: controlsConfiguration,
-            aspectRatio: 16 / 9,
-            fit: BoxFit.contain,
-            subtitlesConfiguration: BetterPlayerSubtitlesConfiguration(
-              fontSize: 16.0,
-            ));
+    BetterPlayerConfiguration(
+        controlsConfiguration: controlsConfiguration,
+        aspectRatio: size.width/size.height,
+        autoDetectFullscreenAspectRatio:true,
+        fit: BoxFit.cover,
+        subtitlesConfiguration: BetterPlayerSubtitlesConfiguration(
+          fontSize: 16.0,
+        ));
     BetterPlayerDataSource dataSource = BetterPlayerDataSource(
-        BetterPlayerDataSourceType.network, Constants.hlsPlaylistUrl,
-        useAsmsSubtitles: true);
+        BetterPlayerDataSourceType.network, "https://hi-erbil.s3.amazonaws.com/processVideos/2023/October/1698756840453_f0TlOTo9CO/index.m3u8",//Constants.hlsPlaylistUrl,
+        useAsmsSubtitles: true,
+
+
+    );
     _betterPlayerController = BetterPlayerController(betterPlayerConfiguration);
     _betterPlayerController.setupDataSource(dataSource);
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("HLS subtitles"),
-      ),
+
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(height: 8),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Text(
-                "Player with HLS stream which loads subtitles from HLS."
-                " You can choose subtitles by using overflow menu (3 dots in right corner).",
-                style: TextStyle(fontSize: 16),
-              ),
-            ),
-            AspectRatio(
-              aspectRatio: 16 / 9,
-              child: BetterPlayer(controller: _betterPlayerController),
-            ),
+            SafeArea(child: BetterPlayer(controller: _betterPlayerController)),
           ],
         ),
       ),
